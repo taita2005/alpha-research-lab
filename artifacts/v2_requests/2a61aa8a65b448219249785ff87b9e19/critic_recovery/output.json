@@ -1,0 +1,349 @@
+{
+  "request_id": "2a61aa8a65b448219249785ff87b9e19",
+  "experiment_id": "96dd2474b86c43739f2076c3c6ec7576",
+  "model": "gemini-3.6-flash",
+  "evidence_sha256": "05543e9daf49a18427b3bec8850fe0c3d89926abb63b240299924cd82387ed61",
+  "system_prompt_sha256": "d43836ceaab92b75e1f2676ba729493bbe67582ced4cf0a9562385b94bea4fb4",
+  "proposal": {
+    "name": "volatility_adjusted_momentum_126",
+    "hypothesis": "Risk-adjusting the medium-term 126-session price return by dividing it by the trailing 126-session daily volatility reduces exposure to high-beta, crash-prone stocks and prioritizes assets with steady directional trends.",
+    "expression": {
+      "op": "safe_divide",
+      "left": {
+        "op": "return",
+        "field": "adj_close",
+        "window": 126
+      },
+      "right": {
+        "op": "rolling_std",
+        "input": {
+          "op": "return",
+          "field": "adj_close",
+          "window": 1
+        },
+        "window": 126
+      }
+    },
+    "overfit_risk": "Using matching lookback windows (126 days) for both return and volatility may introduce structural bias if volatility dynamics operate on a shorter timescale (e.g., 21 days), potentially lagging during rapid regime shifts."
+  },
+  "formula": "safe_divide(return(adj_close, 126), rolling_std(return(adj_close, 1), 126))",
+  "result": {
+    "run_id": "96dd2474b86c43739f2076c3c6ec7576",
+    "formula": "safe_divide(return(adj_close, 126), rolling_std(return(adj_close, 1), 126))",
+    "proposal": {
+      "name": "volatility_adjusted_momentum_126",
+      "hypothesis": "Risk-adjusting the medium-term 126-session price return by dividing it by the trailing 126-session daily volatility reduces exposure to high-beta, crash-prone stocks and prioritizes assets with steady directional trends.",
+      "expression": {
+        "op": "safe_divide",
+        "left": {
+          "op": "return",
+          "field": "adj_close",
+          "window": 126
+        },
+        "right": {
+          "op": "rolling_std",
+          "input": {
+            "op": "return",
+            "field": "adj_close",
+            "window": 1
+          },
+          "window": 126
+        }
+      },
+      "overfit_risk": "Using matching lookback windows (126 days) for both return and volatility may introduce structural bias if volatility dynamics operate on a shorter timescale (e.g., 21 days), potentially lagging during rapid regime shifts."
+    },
+    "decision": {
+      "keep": true,
+      "status": "keep_for_research",
+      "gates": {
+        "sharpe": true,
+        "drawdown": true,
+        "turnover": true
+      },
+      "failed": [],
+      "interpretation": "Exploratory validation screening only; not independent test evidence or deployment approval."
+    },
+    "metrics": [
+      {
+        "split": "dev",
+        "strategy": "candidate",
+        "cost_bps": 10.0,
+        "total_return": 0.973478381434518,
+        "cagr": 0.088873465065896,
+        "net_sharpe": 0.706722863752423,
+        "annual_volatility": 0.133034056024853,
+        "max_drawdown": -0.195855921422612,
+        "annual_turnover": 7.162536935190478,
+        "total_fees": 7660.819060627989,
+        "final_equity": 197347.83814345184,
+        "mean_cash_fraction": 0.099778114393683
+      },
+      {
+        "split": "dev",
+        "strategy": "baseline",
+        "cost_bps": 10.0,
+        "total_return": 0.805071605871056,
+        "cagr": 0.076776442318596,
+        "net_sharpe": 0.600176282210006,
+        "annual_volatility": 0.139513097406763,
+        "max_drawdown": -0.208958210179638,
+        "annual_turnover": 7.7111882270657,
+        "total_fees": 7927.105390347331,
+        "final_equity": 180507.1605871056,
+        "mean_cash_fraction": 0.099806551703416
+      },
+      {
+        "split": "dev",
+        "strategy": "spy_buy_hold",
+        "cost_bps": 10.0,
+        "total_return": 1.671959891083413,
+        "cagr": 0.130992728930513,
+        "net_sharpe": 0.945697853945349,
+        "annual_volatility": 0.140675479035741,
+        "max_drawdown": -0.178417388136694,
+        "annual_turnover": 0.118873154002703,
+        "total_fees": 94.90983565612669,
+        "final_equity": 267195.9891083413,
+        "mean_cash_fraction": 0.033483191340992
+      },
+      {
+        "split": "dev",
+        "strategy": "equal_weight_buy_hold",
+        "cost_bps": 10.0,
+        "total_return": 1.760318743249392,
+        "cagr": 0.135610728013708,
+        "net_sharpe": 0.953043874545973,
+        "annual_volatility": 0.144431585860666,
+        "max_drawdown": -0.180145750197462,
+        "annual_turnover": 0.118873154002703,
+        "total_fees": 94.90983565612669,
+        "final_equity": 276031.8743249392,
+        "mean_cash_fraction": 0.032631355092454
+      },
+      {
+        "split": "dev",
+        "strategy": "candidate",
+        "cost_bps": 20.0,
+        "total_return": 0.863716818414524,
+        "cagr": 0.081097050221195,
+        "net_sharpe": 0.652499951474167,
+        "annual_volatility": 0.133119541784078,
+        "max_drawdown": -0.197904156497279,
+        "annual_turnover": 7.160002613097046,
+        "total_fees": 14836.25613292021,
+        "final_equity": 186371.68184145243,
+        "mean_cash_fraction": 0.099778114393683
+      },
+      {
+        "split": "dev",
+        "strategy": "baseline",
+        "cost_bps": 20.0,
+        "total_return": 0.697221210811124,
+        "cagr": 0.068499684819154,
+        "net_sharpe": 0.544766941649597,
+        "annual_volatility": 0.139544050179004,
+        "max_drawdown": -0.210475620847368,
+        "annual_turnover": 7.708251396568084,
+        "total_fees": 15320.797118757127,
+        "final_equity": 169722.1210811124,
+        "mean_cash_fraction": 0.099806551703416
+      },
+      {
+        "split": "dev",
+        "strategy": "spy_buy_hold",
+        "cost_bps": 20.0,
+        "total_return": 1.669426342928387,
+        "cagr": 0.130858356000978,
+        "net_sharpe": 0.944843385357564,
+        "annual_volatility": 0.140677124868906,
+        "max_drawdown": -0.178417388136693,
+        "annual_turnover": 0.118760438665541,
+        "total_fees": 189.63968459926144,
+        "final_equity": 266942.6342928387,
+        "mean_cash_fraction": 0.033483191340992
+      },
+      {
+        "split": "dev",
+        "strategy": "equal_weight_buy_hold",
+        "cost_bps": 20.0,
+        "total_return": 1.757701413370075,
+        "cagr": 0.135475806420994,
+        "net_sharpe": 0.952211726406044,
+        "annual_volatility": 0.144433203937979,
+        "max_drawdown": -0.180145750197463,
+        "annual_turnover": 0.118760438665541,
+        "total_fees": 189.63968459926141,
+        "final_equity": 275770.14133700746,
+        "mean_cash_fraction": 0.032631355092455
+      },
+      {
+        "split": "val",
+        "strategy": "candidate",
+        "cost_bps": 10.0,
+        "total_return": 0.729107850114124,
+        "cagr": 0.146870977877485,
+        "net_sharpe": 0.766321986950267,
+        "annual_volatility": 0.206935419762684,
+        "max_drawdown": -0.290650599438527,
+        "annual_turnover": 6.667829236345018,
+        "total_fees": 3249.168505693936,
+        "final_equity": 172910.7850114124,
+        "mean_cash_fraction": 0.07055345454018
+      },
+      {
+        "split": "val",
+        "strategy": "baseline",
+        "cost_bps": 10.0,
+        "total_return": 0.670728444521868,
+        "cagr": 0.13705587311416,
+        "net_sharpe": 0.710927475585366,
+        "annual_volatility": 0.212660933990112,
+        "max_drawdown": -0.290650599438527,
+        "annual_turnover": 7.458058197532431,
+        "total_fees": 3581.794896307513,
+        "final_equity": 167072.84445218684,
+        "mean_cash_fraction": 0.07055691050006
+      },
+      {
+        "split": "val",
+        "strategy": "spy_buy_hold",
+        "cost_bps": 10.0,
+        "total_return": 0.836252282714915,
+        "cagr": 0.164256340027867,
+        "net_sharpe": 0.866103740362904,
+        "annual_volatility": 0.198535743113974,
+        "max_drawdown": -0.324041814401635,
+        "annual_turnover": 0.237510214352968,
+        "total_fees": 94.90983565612669,
+        "final_equity": 183625.22827149153,
+        "mean_cash_fraction": 0.042503250916186
+      },
+      {
+        "split": "val",
+        "strategy": "equal_weight_buy_hold",
+        "cost_bps": 10.0,
+        "total_return": 0.800852956854753,
+        "cagr": 0.158598572049669,
+        "net_sharpe": 0.827317060668533,
+        "annual_volatility": 0.203083472817233,
+        "max_drawdown": -0.327232079910571,
+        "annual_turnover": 0.237510214352968,
+        "total_fees": 94.90983565612669,
+        "final_equity": 180085.2956854753,
+        "mean_cash_fraction": 0.043106443490771
+      },
+      {
+        "split": "val",
+        "strategy": "candidate",
+        "cost_bps": 20.0,
+        "total_return": 0.683617770301126,
+        "cagr": 0.139244768519301,
+        "net_sharpe": 0.734481286781619,
+        "annual_volatility": 0.206773834525487,
+        "max_drawdown": -0.29110203345177,
+        "annual_turnover": 6.665610320266583,
+        "total_fees": 6404.396000378839,
+        "final_equity": 168361.77703011257,
+        "mean_cash_fraction": 0.07055345454018
+      },
+      {
+        "split": "val",
+        "strategy": "baseline",
+        "cost_bps": 20.0,
+        "total_return": 0.621638176015268,
+        "cagr": 0.128601475132151,
+        "net_sharpe": 0.676084191123534,
+        "annual_volatility": 0.212540662661333,
+        "max_drawdown": -0.29110203345177,
+        "annual_turnover": 7.455258396530508,
+        "total_fees": 7047.573098451149,
+        "final_equity": 162163.81760152685,
+        "mean_cash_fraction": 0.07055691050006
+      },
+      {
+        "split": "val",
+        "strategy": "spy_buy_hold",
+        "cost_bps": 20.0,
+        "total_return": 0.83451115119622,
+        "cagr": 0.163979981200425,
+        "net_sharpe": 0.8648987409746,
+        "annual_volatility": 0.198538258608764,
+        "max_drawdown": -0.324041814401634,
+        "annual_turnover": 0.237285007542274,
+        "total_fees": 189.63968459926144,
+        "final_equity": 183451.11511962203,
+        "mean_cash_fraction": 0.042503250916186
+      },
+      {
+        "split": "val",
+        "strategy": "equal_weight_buy_hold",
+        "cost_bps": 20.0,
+        "total_return": 0.799145390921016,
+        "cagr": 0.158323556203211,
+        "net_sharpe": 0.826139828832205,
+        "annual_volatility": 0.203085913722309,
+        "max_drawdown": -0.327232079910571,
+        "annual_turnover": 0.237285007542274,
+        "total_fees": 189.63968459926141,
+        "final_equity": 179914.53909210162,
+        "mean_cash_fraction": 0.043106443490771
+      }
+    ],
+    "ic": [
+      {
+        "split": "dev",
+        "strategy": "candidate",
+        "label_dates": 1991,
+        "ic_dates": 1991,
+        "ic_date_fraction": 1.0,
+        "mean_asset_coverage": 1.0,
+        "mean_ic": 0.043035325632011,
+        "median_ic": 0.066666666666667,
+        "std_ic": 0.446862366728698,
+        "positive_ic_fraction": 0.537920642893019
+      },
+      {
+        "split": "dev",
+        "strategy": "baseline",
+        "label_dates": 1991,
+        "ic_dates": 1991,
+        "ic_date_fraction": 1.0,
+        "mean_asset_coverage": 1.0,
+        "mean_ic": 0.030462079357107,
+        "median_ic": 0.05,
+        "std_ic": 0.455729379250878,
+        "positive_ic_fraction": 0.52787543947765
+      },
+      {
+        "split": "val",
+        "strategy": "candidate",
+        "label_dates": 986,
+        "ic_dates": 986,
+        "ic_date_fraction": 1.0,
+        "mean_asset_coverage": 1.0,
+        "mean_ic": 0.060480054090602,
+        "median_ic": 0.108333333333333,
+        "std_ic": 0.485457477820175,
+        "positive_ic_fraction": 0.550709939148073
+      },
+      {
+        "split": "val",
+        "strategy": "baseline",
+        "label_dates": 986,
+        "ic_dates": 986,
+        "ic_date_fraction": 1.0,
+        "mean_asset_coverage": 1.0,
+        "mean_ic": 0.066260987153482,
+        "median_ic": 0.116666666666667,
+        "std_ic": 0.467465902439976,
+        "positive_ic_fraction": 0.568965517241379
+      }
+    ],
+    "holdout_used": false,
+    "interpretation": "Exploratory dev/validation results. The v1 holdout has already been observed by the researcher."
+  },
+  "critique": "### Hypothesis and Implementation\nThe signal evaluates volatility-adjusted momentum over a 126-session horizon using the expression `safe_divide(return(adj_close, 126), rolling_std(return(adj_close, 1), 126))`. The core hypothesis posits that scaling medium-term price returns by trailing daily return volatility penalizes volatile, high-beta assets that are prone to momentum crashes, thereby prioritizing assets exhibiting steady directional trends.\n\n### Development Evidence\nIn the development split at 10.0 bps transaction costs [dev]:\n* **Candidate**: Net Sharpe 0.7067, CAGR 0.0889, annual volatility 0.1330, max drawdown -0.1959, turnover 7.1625, mean cash fraction 0.0998.\n* **Momentum Baseline**: Net Sharpe 0.6001, CAGR 0.0768, annual volatility 0.1395, max drawdown -0.2090.\n* **SPY Buy & Hold**: Net Sharpe 0.9457, CAGR 0.1310, annual volatility 0.1407, max drawdown -0.1784.\n* **Equal Weight Buy & Hold**: Net Sharpe 0.9530, CAGR 0.1356, annual volatility 0.1444, max drawdown -0.1801.\n\nIn dev IC metrics [ic], candidate mean IC was 0.0430 (median 0.0667, std 0.4469) across 1991 dates with 1.0 mean asset coverage, outperforming the baseline IC of 0.0305. Overlapping forward labels inherent to multi-step return targets introduce autocorrelation in cross-sectional IC series across consecutive dates.\n\n### Validation, Costs and Benchmarks\nOn the validation split at 10.0 bps cost [val]:\n* **Candidate**: Net Sharpe 0.7663, CAGR 0.1469, annual volatility 0.2069, max drawdown -0.2907, turnover 6.6678, mean cash fraction 0.0706.\n* **Momentum Baseline**: Net Sharpe 0.7109, CAGR 0.1371, annual volatility 0.2127, max drawdown -0.2907.\n* **SPY Buy & Hold**: Net Sharpe 0.8661, CAGR 0.1643, annual volatility 0.1985, max drawdown -0.3240.\n* **Equal Weight Buy & Hold**: Net Sharpe 0.8273, CAGR 0.1586, annual volatility 0.2031, max drawdown -0.3272.\n\nAt 20.0 bps transaction cost [val], candidate net Sharpe declines to 0.7345 due to its elevated annual turnover (~6.67). In validation IC [ic], baseline mean IC (0.0663) slightly exceeded candidate mean IC (0.0605), though candidate achieved better net Sharpe due to lower turnover and volatility reduction. While the candidate consistently outperforms the raw momentum baseline, both strategies underperform passive SPY and Equal-Weight buy-and-hold benchmarks on a net Sharpe basis across splits [dev], [val]. Both dev and validation environments are repeatedly used for exploration; hence, these metrics do not represent an untouched test dataset or prove statistical significance.\n\n### Decision Interpretation\nThe automated pipeline evaluated the experiment with a decision of `keep: true` and status `keep_for_research` [decision]. All decision gates passed (`sharpe: true`, `drawdown: true`, `turnover: true`) [decision]. Per the pipeline output, this interpretation confirms exploratory validation screening approval only, and does not serve as independent test evidence or commercial deployment authorization [decision].\n\n### Limitations and Future Research\n* **Symmetric Window Structural Bias**: Matching 126-day return and volatility lookbacks may lag during rapid volatility regime shocks.\n* **Turnover Friction**: Turnover between 6.67 and 7.16 per year incurs significant cost decay.\n* **Future Work**: Evaluate asymmetric lookbacks (e.g., combining 126-day return with 21-day or 63-day trailing volatility), apply signal smoothing/turnover constraints, and test alternative risk-adjustment denominators.",
+  "recovery_llm_calls": 1,
+  "critic_human_verified": false,
+  "recovered_from_failed_request": true
+}

@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "study_type": "exploratory_after_v1_holdout_observed",
+  "data_cutoff": "2021-12-31",
+  "splits": {
+    "dev": [
+      "2010-01-01",
+      "2017-12-31"
+    ],
+    "val": [
+      "2018-01-01",
+      "2021-12-31"
+    ]
+  },
+  "baseline": {
+    "name": "momentum_126",
+    "expression": {
+      "op": "return",
+      "field": "adj_close",
+      "window": 126
+    }
+  },
+  "execution": {
+    "initial_capital": 100000.0,
+    "top_n": 3,
+    "invested_fraction": 0.95,
+    "rebalance_every": 21,
+    "base_cost_bps": 10.0,
+    "stress_cost_bps": 20.0
+  },
+  "ic": {
+    "horizon": 21,
+    "entry_lag": 1,
+    "min_assets": 5
+  },
+  "decision": {
+    "min_sharpe_improvement": 0.02,
+    "max_drawdown_deterioration": 0.02,
+    "max_turnover_ratio": 1.2
+  }
+}

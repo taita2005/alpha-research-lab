@@ -1,0 +1,97 @@
+{
+  "run_id": "c58d1b134c994a82bcfdc3c684917b5a",
+  "status": "completed",
+  "started_at_utc": "2026-09-11T15:53:26.143738+00:00",
+  "proposal": {
+    "name": "volatility_adjusted_momentum_126",
+    "hypothesis": "Scaling the 126-session price return by the trailing 126-session price volatility penalizes assets achieving high returns through unstable, high-variance spikes, yielding a higher quality momentum signal that improves risk-adjusted returns.",
+    "expression": {
+      "op": "safe_divide",
+      "left": {
+        "op": "return",
+        "field": "adj_close",
+        "window": 126
+      },
+      "right": {
+        "op": "rolling_std",
+        "input": {
+          "op": "return",
+          "field": "adj_close",
+          "window": 1
+        },
+        "window": 126
+      }
+    },
+    "overfit_risk": "Using a matching 126-day window for both return and volatility estimation might over-fit to specific medium-term regime lengths, and the volatility denominator could introduce noise or extreme values during periods of transient low volatility."
+  },
+  "formula": "safe_divide(return(adj_close, 126), rolling_std(return(adj_close, 1), 126))",
+  "expression_hash": "f381ba1f34096c73328929a0dd80364522d5f7d4054012833fd2252c0769ca8c",
+  "dsl_version": "1.0",
+  "config": {
+    "version": 1,
+    "study_type": "exploratory_after_v1_holdout_observed",
+    "data_cutoff": "2021-12-31",
+    "splits": {
+      "dev": [
+        "2010-01-01",
+        "2017-12-31"
+      ],
+      "val": [
+        "2018-01-01",
+        "2021-12-31"
+      ]
+    },
+    "baseline": {
+      "name": "momentum_126",
+      "expression": {
+        "op": "return",
+        "field": "adj_close",
+        "window": 126
+      }
+    },
+    "execution": {
+      "initial_capital": 100000.0,
+      "top_n": 3,
+      "invested_fraction": 0.95,
+      "rebalance_every": 21,
+      "base_cost_bps": 10.0,
+      "stress_cost_bps": 20.0
+    },
+    "ic": {
+      "horizon": 21,
+      "entry_lag": 1,
+      "min_assets": 5
+    },
+    "decision": {
+      "min_sharpe_improvement": 0.02,
+      "max_drawdown_deterioration": 0.02,
+      "max_turnover_ratio": 1.2
+    }
+  },
+  "config_sha256": "626ca8d04e6482bc35b4ccd50ce91c24d80edcd124ab9aaa31442f451d1b68c7",
+  "data_hashes": {
+    "data/processed/warmup/adj_close.parquet": "afd61e1a50286102781291e2a830a3ae34f574f2ec3717daaf8947a310c94e79",
+    "data/processed/warmup/close.parquet": "4b66c5ee76005d514f380f0fd0aeaae37ff9903ef5829b0fc62d4a0564c420dc",
+    "data/processed/warmup/volume.parquet": "ef37bef5b322d4ddc79cfc56fbded103576e118842ae9aef13e2ae47e1fea14d",
+    "data/processed/dev/adj_close.parquet": "467b9ee9b654eaa14321f541cd67ead0e0333aca95b296d93132b4506ba13157",
+    "data/processed/dev/close.parquet": "6062818aa75e355c61adc8959257a1c0c43ed4c7482fd57b8a162ea52bae50f3",
+    "data/processed/dev/volume.parquet": "eb38ea3933fd43b93860790a0debd43acf8b14457fee5f18c2a59a7f6ebeb6d9",
+    "data/processed/val/adj_close.parquet": "e2397d233d2f69a96affa4a8f61f992541bb9c65e76992f0ff75b38643042277",
+    "data/processed/val/close.parquet": "58ab1ac8458a2ab61985d36079bd9fd3162a165c736f644a15a62e430ffeb347",
+    "data/processed/val/volume.parquet": "72fac1aca65995a9f9d28d40d317cbcd8a30ca898bd1cad2255f764b022bc880"
+  },
+  "code_hashes": {
+    "src/alpha_lab/alpha_schema.py": "760e4fc092cd495df841c50b50a14d1e85dcc918a500fdea0c7d4f82b838d3d9",
+    "src/alpha_lab/alpha_dsl.py": "d7eef68b7c0e4a43f9d18c41866d59adf010d1df988bf9324bd87513fd67bb16",
+    "src/alpha_lab/research_data.py": "8a0a7708975586416dab8bf403ec557f033adbfde58df090e558491901b63020",
+    "src/alpha_lab/research_decision.py": "dd9179dc4cb04b4f4b5a241709a6a4040d43f24ac20dafe5f714f994f70426e8",
+    "src/alpha_lab/experiment_runner.py": "61072a4a154a72e56a21884313bff24914836cac1180ca12162db393a766a01e",
+    "src/alpha_lab/backtest.py": "1a6e332fd4a9314425884580f4c6d487bf675166a29f7a52b1e98f234717bbb9",
+    "src/alpha_lab/evaluation.py": "fbe7d0ea126eb5bdbf00a681a865767bfcccfe3c62a60d5cca7c93359d7aa69c",
+    "src/alpha_lab/signals.py": "0b6926d916ba0b3150ee66c09e8210611d7911c065c359094daf560b720d564a"
+  },
+  "holdout_used": false,
+  "study_type": "exploratory_after_v1_holdout_observed",
+  "completed_at_utc": "2026-09-11T15:53:52.956075+00:00",
+  "result_sha256": "0f3ad1c79cf01c92e7e91df4ebe9ad1bfa150095e4e14aaec124e25cd50d62f9"
+}

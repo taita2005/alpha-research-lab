@@ -1,0 +1,22 @@
+{
+  "name": "volatility_adjusted_momentum_126",
+  "hypothesis": "Risk-adjusting the medium-term 126-session price return by dividing it by the trailing 126-session daily volatility reduces exposure to high-beta, crash-prone stocks and prioritizes assets with steady directional trends.",
+  "expression": {
+    "op": "safe_divide",
+    "left": {
+      "op": "return",
+      "field": "adj_close",
+      "window": 126
+    },
+    "right": {
+      "op": "rolling_std",
+      "input": {
+        "op": "return",
+        "field": "adj_close",
+        "window": 1
+      },
+      "window": 126
+    }
+  },
+  "overfit_risk": "Using matching lookback windows (126 days) for both return and volatility may introduce structural bias if volatility dynamics operate on a shorter timescale (e.g., 21 days), potentially lagging during rapid regime shifts."
+}

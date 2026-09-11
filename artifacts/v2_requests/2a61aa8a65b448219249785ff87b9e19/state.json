@@ -1,0 +1,10 @@
+{
+  "request_id": "2a61aa8a65b448219249785ff87b9e19",
+  "signature": "240603cc76cb200f316a2afe2d6cfc5a2f462f81cca2bf34f719a90158f6b92a",
+  "status": "failed",
+  "stage": "critic",
+  "created_at_utc": "2026-09-11T15:34:42.091980+00:00",
+  "expression_hash": "f381ba1f34096c73328929a0dd80364522d5f7d4054012833fd2252c0769ca8c",
+  "experiment_id": "96dd2474b86c43739f2076c3c6ec7576",
+  "error_type": "ServerError"
+}

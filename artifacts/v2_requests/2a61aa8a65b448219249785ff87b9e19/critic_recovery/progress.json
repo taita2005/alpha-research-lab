@@ -1,0 +1,13 @@
+{
+  "binding": {
+    "request_id": "2a61aa8a65b448219249785ff87b9e19",
+    "experiment_id": "96dd2474b86c43739f2076c3c6ec7576",
+    "model": "gemini-3.6-flash",
+    "evidence_sha256": "05543e9daf49a18427b3bec8850fe0c3d89926abb63b240299924cd82387ed61",
+    "system_prompt_sha256": "d43836ceaab92b75e1f2676ba729493bbe67582ced4cf0a9562385b94bea4fb4"
+  },
+  "attempts": 1,
+  "status": "completed",
+  "updated_utc": "2026-09-11T16:01:19.016939+00:00",
+  "output_sha256": "86977bd93a0aaf33622fc2b643eef92c8e6fc43fdaab792c93476f1b6efbbcde"
+}

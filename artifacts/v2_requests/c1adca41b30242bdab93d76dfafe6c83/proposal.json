@@ -1,0 +1,22 @@
+{
+  "name": "volatility_adjusted_momentum_126",
+  "hypothesis": "Scaling the 126-session price return by the trailing 126-session price volatility penalizes assets achieving high returns through unstable, high-variance spikes, yielding a higher quality momentum signal that improves risk-adjusted returns.",
+  "expression": {
+    "op": "safe_divide",
+    "left": {
+      "op": "return",
+      "field": "adj_close",
+      "window": 126
+    },
+    "right": {
+      "op": "rolling_std",
+      "input": {
+        "op": "return",
+        "field": "adj_close",
+        "window": 1
+      },
+      "window": 126
+    }
+  },
+  "overfit_risk": "Using a matching 126-day window for both return and volatility estimation might over-fit to specific medium-term regime lengths, and the volatility denominator could introduce noise or extreme values during periods of transient low volatility."
+}
