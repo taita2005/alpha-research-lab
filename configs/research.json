@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "project": "alpha-research-lab",
+  "data_config": "configs/data.json",
+  "seed": 42,
+  "candidates": [
+    {
+      "name": "momentum_126",
+      "signal": "momentum",
+      "params": {
+        "lookback": 126
+      }
+    },
+    {
+      "name": "reversal_5",
+      "signal": "reversal",
+      "params": {
+        "lookback": 5
+      }
+    },
+    {
+      "name": "volume_momentum_126",
+      "signal": "volume_filtered_momentum",
+      "params": {
+        "lookback": 126,
+        "short_window": 20,
+        "long_window": 120,
+        "min_ratio": 1.0
+      }
+    }
+  ],
+  "portfolio": {
+    "long_only": true,
+    "top_n": 3,
+    "invested_fraction": 0.95,
+    "require_positive_score": true,
+    "weighting": "equal_weight_selected",
+    "no_eligible_assets": "all_cash",
+    "score_tie_break": "ticker_ascending",
+    "fractional_shares": true
+  },
+  "execution": {
+    "signal_time": "close_t",
+    "execution_time": "close_t_plus_1",
+    "lag_sessions": 1,
+    "rebalance_every_sessions": 21,
+    "schedule_anchor": "first_evaluation_session_of_each_split",
+    "initial_position_each_split": "all_cash",
+    "cost_bps_per_side": 10.0,
+    "stress_cost_bps_per_side": [
+      20.0
+    ],
+    "cash_return_annual": 0.0,
+    "terminal_liquidation": false
+  },
+  "signal_evaluation": {
+    "metric": "cross_sectional_spearman_ic",
+    "forward_horizon_sessions": 21,
+    "entry_lag_sessions": 1,
+    "label_definition": "adj_close[t+22] / adj_close[t+1] - 1",
+    "require_entry_and_exit_inside_split": true,
+    "min_assets_per_date": 5,
+    "missing_scores": "exclude_and_report_coverage",
+    "overlapping_labels": true,
+    "naive_independent_sample_pvalues": false
+  },
+  "selection": {
+    "split": "val",
+    "metric": "net_sharpe",
+    "annualization_sessions": 252,
+    "risk_free_annual": 0.0,
+    "undefined_sharpe": "exclude_candidate",
+    "tie_tolerance": 1e-08,
+    "tie_break_order": [
+      "momentum_126",
+      "reversal_5",
+      "volume_momentum_126"
+    ],
+    "benchmarks": [
+      "spy_buy_hold",
+      "equal_weight_buy_hold"
+    ],
+    "benchmark_invested_fraction": 0.95,
+    "benchmark_same_execution_and_costs": true,
+    "stress_results_change_selection": false,
+    "holdout_after_freeze_only": true
+  }
+}

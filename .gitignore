@@ -1,0 +1,10 @@
+.env
+.env.*
+.streamlit/secrets.toml
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/raw/
+data/processed/
+*.zip

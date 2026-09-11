@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "title": "Alpha Research Lab",
+  "subtitle": "Signal evaluation and LLM-assisted research review",
+  "selected_strategy": "momentum_126",
+  "agent_run_id": "20260911T060008_3da54069",
+  "agent_requests": 2,
+  "agent_tool_calls": 5,
+  "agent_role": "post-experiment read-only reviewer",
+  "human_verified": false,
+  "public_release_status": "not_published",
+  "sources": {
+    "research_config": {
+      "path": "configs/research.json",
+      "sha256": "f4b0d5f98f2d96a1aebd3c9f58a30d19a1a040d190ea11d96e47ad053b5090da"
+    },
+    "data_config": {
+      "path": "configs/data.json",
+      "sha256": "ececcb766087bb045f7635e26994c63b9c7c36fcc5f534b9b2def3d4a2d1b3b9"
+    },
+    "dev_ic": {
+      "path": "artifacts/dev_ic/summary.csv",
+      "sha256": "ac9a2b82e4366e2c942c1261c79dd9ea481f82da071c89a8bab76b4f60e06883"
+    },
+    "dev_backtest": {
+      "path": "artifacts/dev_backtest/summary.csv",
+      "sha256": "3ca90b244fa1e60530156b3efb302c794d6a2f776a9705bfdf123c9fdd57d034"
+    },
+    "val_backtest": {
+      "path": "artifacts/val_backtest/summary.csv",
+      "sha256": "8b854cd5c8a3722c6765261e763b409c7e8aa760abcc1aa26bbc9185f4f38299"
+    },
+    "holdout_backtest": {
+      "path": "artifacts/holdout/summary.csv",
+      "sha256": "622ee9db17232c74a310014b6cbd2ea27d459de2d33293b0d0647d76e001a3fd"
+    },
+    "frozen_selection": {
+      "path": "artifacts/frozen_selection.json",
+      "sha256": "5010391697b431c7c370925b26e13ef44ae3a784e4f21eacc7ae25a41c6e59d6"
+    },
+    "holdout_receipt": {
+      "path": "artifacts/holdout/receipt.json",
+      "sha256": "3e1fd059d20f00c7898d3f402be8769e97b352544d73f8d62c546807da82f551"
+    },
+    "agent_review_original": {
+      "path": "artifacts/agent_runs/20260911T060008_3da54069/review.md",
+      "sha256": "e93c43712bb45d9f5730f26ef8109305f933424029ca98e495a03747da0599fa"
+    },
+    "agent_review_edited": {
+      "path": "artifacts/agent_runs/20260911T060008_3da54069/review_edited.md",
+      "sha256": "06c10cefb67a4f8831c7577291eee485e582b4df10c91673174e3bee0dc7a751"
+    },
+    "agent_editorial_record": {
+      "path": "artifacts/agent_runs/20260911T060008_3da54069/editorial_review.json",
+      "sha256": "adfc10ae6d059cbb2a9d3a7824ca8fd68c87f5f0bcbd2cd8231071c7f623bd58"
+    },
+    "agent_trace": {
+      "path": "artifacts/agent_runs/20260911T060008_3da54069/trace.jsonl",
+      "sha256": "37b0cd3cc76509f4de8eb24a3365516a2c2f1e32e47b37c9729bb9930b6da0f4"
+    },
+    "agent_metadata": {
+      "path": "artifacts/agent_runs/20260911T060008_3da54069/metadata.json",
+      "sha256": "45b740047bb76dcb76a9613e7bb090d752e1f28a8420e1873255984ed0c09b71"
+    },
+    "holdout_history:momentum_126": {
+      "path": "artifacts/holdout/momentum_126_history.csv",
+      "sha256": "be74db53ccaba991ab9f3bea1bc86df9754c980f215de3d4dbff0dd64acf5632"
+    },
+    "holdout_history:spy_buy_hold": {
+      "path": "artifacts/holdout/spy_buy_hold_history.csv",
+      "sha256": "be978b4386b6a4d26e65cf36fcc29988fc5fd2c260d62eafb732774e6813faf9"
+    },
+    "holdout_history:equal_weight_buy_hold": {
+      "path": "artifacts/holdout/equal_weight_buy_hold_history.csv",
+      "sha256": "bf7686c21976084a190dcaad33e6c13ab1ba89bf45f2bf34258ee55f1f01522c"
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "frozen_at_utc": "2026-09-11T04:48:11.635376+00:00",
+  "selected_candidate": {
+    "name": "momentum_126",
+    "signal": "momentum",
+    "params": {
+      "lookback": 126
+    }
+  },
+  "selection_split": "val",
+  "selection_metric": "net_sharpe",
+  "selection_cost_bps": 10.0,
+  "validation_sharpe": 0.710927475585366,
+  "research_config": {
+    "schema_version": 1,
+    "project": "alpha-research-lab",
+    "data_config": "configs/data.json",
+    "seed": 42,
+    "candidates": [
+      {
+        "name": "momentum_126",
+        "signal": "momentum",
+        "params": {
+          "lookback": 126
+        }
+      },
+      {
+        "name": "reversal_5",
+        "signal": "reversal",
+        "params": {
+          "lookback": 5
+        }
+      },
+      {
+        "name": "volume_momentum_126",
+        "signal": "volume_filtered_momentum",
+        "params": {
+          "lookback": 126,
+          "short_window": 20,
+          "long_window": 120,
+          "min_ratio": 1.0
+        }
+      }
+    ],
+    "portfolio": {
+      "long_only": true,
+      "top_n": 3,
+      "invested_fraction": 0.95,
+      "require_positive_score": true,
+      "weighting": "equal_weight_selected",
+      "no_eligible_assets": "all_cash",
+      "score_tie_break": "ticker_ascending",
+      "fractional_shares": true
+    },
+    "execution": {
+      "signal_time": "close_t",
+      "execution_time": "close_t_plus_1",
+      "lag_sessions": 1,
+      "rebalance_every_sessions": 21,
+      "schedule_anchor": "first_evaluation_session_of_each_split",
+      "initial_position_each_split": "all_cash",
+      "cost_bps_per_side": 10.0,
+      "stress_cost_bps_per_side": [
+        20.0
+      ],
+      "cash_return_annual": 0.0,
+      "terminal_liquidation": false
+    },
+    "signal_evaluation": {
+      "metric": "cross_sectional_spearman_ic",
+      "forward_horizon_sessions": 21,
+      "entry_lag_sessions": 1,
+      "label_definition": "adj_close[t+22] / adj_close[t+1] - 1",
+      "require_entry_and_exit_inside_split": true,
+      "min_assets_per_date": 5,
+      "missing_scores": "exclude_and_report_coverage",
+      "overlapping_labels": true,
+      "naive_independent_sample_pvalues": false
+    },
+    "selection": {
+      "split": "val",
+      "metric": "net_sharpe",
+      "annualization_sessions": 252,
+      "risk_free_annual": 0.0,
+      "undefined_sharpe": "exclude_candidate",
+      "tie_tolerance": 1e-08,
+      "tie_break_order": [
+        "momentum_126",
+        "reversal_5",
+        "volume_momentum_126"
+      ],
+      "benchmarks": [
+        "spy_buy_hold",
+        "equal_weight_buy_hold"
+      ],
+      "benchmark_invested_fraction": 0.95,
+      "benchmark_same_execution_and_costs": true,
+      "stress_results_change_selection": false,
+      "holdout_after_freeze_only": true
+    }
+  },
+  "file_hashes": {
+    "configs/data.json": "ececcb766087bb045f7635e26994c63b9c7c36fcc5f534b9b2def3d4a2d1b3b9",
+    "configs/research.json": "f4b0d5f98f2d96a1aebd3c9f58a30d19a1a040d190ea11d96e47ad053b5090da",
+    "src/alpha_lab/signals.py": "0b6926d916ba0b3150ee66c09e8210611d7911c065c359094daf560b720d564a",
+    "src/alpha_lab/backtest.py": "1a6e332fd4a9314425884580f4c6d487bf675166a29f7a52b1e98f234717bbb9",
+    "src/alpha_lab/selection.py": "fe0a03fbceb3a7ca2f9f1569834c647352b77bbfb4392fa86b900f687c4b0995",
+    "artifacts/val_backtest/summary.csv": "8b854cd5c8a3722c6765261e763b409c7e8aa760abcc1aa26bbc9185f4f38299",
+    "data/raw/etf_daily_2009_2025.parquet": "611cffc37771f6dd7cff0ecd21009e28be20a1a0c91e398a508d5a9a6433ab39",
+    "data/processed/warmup/adj_close.parquet": "afd61e1a50286102781291e2a830a3ae34f574f2ec3717daaf8947a310c94e79",
+    "data/processed/warmup/close.parquet": "4b66c5ee76005d514f380f0fd0aeaae37ff9903ef5829b0fc62d4a0564c420dc",
+    "data/processed/warmup/volume.parquet": "ef37bef5b322d4ddc79cfc56fbded103576e118842ae9aef13e2ae47e1fea14d",
+    "data/processed/dev/adj_close.parquet": "467b9ee9b654eaa14321f541cd67ead0e0333aca95b296d93132b4506ba13157",
+    "data/processed/dev/close.parquet": "6062818aa75e355c61adc8959257a1c0c43ed4c7482fd57b8a162ea52bae50f3",
+    "data/processed/dev/volume.parquet": "eb38ea3933fd43b93860790a0debd43acf8b14457fee5f18c2a59a7f6ebeb6d9",
+    "data/processed/val/adj_close.parquet": "e2397d233d2f69a96affa4a8f61f992541bb9c65e76992f0ff75b38643042277",
+    "data/processed/val/close.parquet": "58ab1ac8458a2ab61985d36079bd9fd3162a165c736f644a15a62e430ffeb347",
+    "data/processed/val/volume.parquet": "72fac1aca65995a9f9d28d40d317cbcd8a30ca898bd1cad2255f764b022bc880"
+  },
+  "holdout_evaluated": false,
+  "interpretation": "Best registered candidate by base-cost validation Sharpe; this does not imply benchmark outperformance."
+}

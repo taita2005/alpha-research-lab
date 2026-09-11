@@ -1,0 +1,10 @@
+{
+  "model": "gemini-3.6-flash",
+  "sdk_version": "2.12.1",
+  "agent_code_sha256": "3fc2600dfc5d62bc3e5ed935e9b494deb8eed7163022b36674b4285e0d36956f",
+  "freeze_sha256": "5010391697b431c7c370925b26e13ef44ae3a784e4f21eacc7ae25a41c6e59d6",
+  "role": "post-experiment read-only review",
+  "human_verified": false,
+  "run_status": "completed",
+  "review_sha256": "e93c43712bb45d9f5730f26ef8109305f933424029ca98e495a03747da0599fa"
+}

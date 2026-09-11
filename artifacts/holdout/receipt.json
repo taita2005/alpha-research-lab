@@ -1,0 +1,19 @@
+{
+  "completed_at_utc": "2026-09-11T04:51:41.480166+00:00",
+  "freeze_sha256": "5010391697b431c7c370925b26e13ef44ae3a784e4f21eacc7ae25a41c6e59d6",
+  "evaluated_strategies": [
+    "momentum_126",
+    "spy_buy_hold",
+    "equal_weight_buy_hold"
+  ],
+  "holdout_evaluated": true,
+  "result_hashes": {
+    "artifacts/holdout/momentum_126_history.csv": "be74db53ccaba991ab9f3bea1bc86df9754c980f215de3d4dbff0dd64acf5632",
+    "artifacts/holdout/momentum_126_trades.csv": "e3b2dac617688085d2c18ec080db0a87080d495e4126f0325e9c16b6a6b99efe",
+    "artifacts/holdout/spy_buy_hold_history.csv": "be978b4386b6a4d26e65cf36fcc29988fc5fd2c260d62eafb732774e6813faf9",
+    "artifacts/holdout/spy_buy_hold_trades.csv": "f342b7f35f89bfeaa2d008758e5253b9919bf9a812a3e30197bd6cf541a625ca",
+    "artifacts/holdout/equal_weight_buy_hold_history.csv": "bf7686c21976084a190dcaad33e6c13ab1ba89bf45f2bf34258ee55f1f01522c",
+    "artifacts/holdout/equal_weight_buy_hold_trades.csv": "9268324390b35fb6a239acb3b87fdb47f1dfddebb99cd5b4386fd90ff64e69ca",
+    "artifacts/holdout/summary.csv": "622ee9db17232c74a310014b6cbd2ea27d459de2d33293b0d0647d76e001a3fd"
+  }
+}

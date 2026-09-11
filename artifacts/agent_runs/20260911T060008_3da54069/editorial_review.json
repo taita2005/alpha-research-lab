@@ -1,0 +1,15 @@
+{
+  "original_review": "review.md",
+  "original_sha256": "e93c43712bb45d9f5730f26ef8109305f933424029ca98e495a03747da0599fa",
+  "edited_review": "review_edited.md",
+  "edited_sha256": "06c10cefb67a4f8831c7577291eee485e582b4df10c91673174e3bee0dc7a751",
+  "changes": [
+    "Clarify hash verification scope",
+    "Describe the dollar-volume filter precisely",
+    "Remove unsupported independence-assumption claim",
+    "Limit claims about post-holdout changes to observed evidence"
+  ],
+  "numerical_values_edited": false,
+  "human_verified": false,
+  "status": "editorial_corrections_applied_pending_human_approval"
+}
