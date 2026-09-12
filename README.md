@@ -1,104 +1,60 @@
 # Alpha Research Lab
 
-A research prototype for evaluating simple ETF signals and auditing
-the results with a tool-calling LLM reviewer.
+LLM-assisted alpha research with a restricted expression DSL,
+a deterministic backtest engine, and an evidence-based Critic.
 
-## What it does
+## Live demo
 
-- Evaluates momentum, reversal and volume-conditioned momentum.
-- Measures cross-sectional rank IC and signal coverage.
-- Simulates long-only portfolios with delayed execution and transaction costs.
-- Selects a candidate on validation and records a frozen holdout evaluation.
-- Runs a read-only Gemini reviewer against registered evidence.
-- Presents saved results, reviews and tool traces in a Streamlit app.
+Entry point: app/research_workspace.py
 
-## Main result
+Enable live research in Streamlit app settings / Secrets:
 
-The frozen `momentum_126` strategy achieved holdout CAGR
-**12.00%** and net Sharpe **0.680**.
+    ALPHA_ENABLE_LIVE_RESEARCH = true
 
-It underperformed passive benchmarks on CAGR and Sharpe in development
-and validation. Its holdout result does not establish statistically
-significant or persistent alpha.
+Visitors enter their own Gemini API key in the password field.
+The application does not save that key in research artifacts.
 
-See [the research report](reports/research_report.md).
+The deployment includes the verified warmup, development and
+validation snapshot needed by the current engine.
+Holdout prices are not included.
 
-## Run the demo
+## Workflow
 
-Use a Python environment compatible with the recorded dependencies.
-The original research ran on Python 3.13.
+1. Enter a research question.
+2. Generate and validate a structured alpha proposal.
+3. Run dev/validation experiments with fixed execution rules.
+4. Apply deterministic selection gates.
+5. Request a Critic review and download results.
 
-```bash
-python -m venv .venv
-```
+Each browser session receives its own temporary workspace.
+Download new results before leaving the session.
+This is a personal research demo, not a durable multi-user service.
 
-Activate the environment using your operating system's usual command, then:
+A request may fail if the external model is unavailable.
+The engine result is retained if failure occurs at the Critic stage.
+Automatic Critic recovery is not yet integrated into the web interface.
 
-```bash
-python -m pip install -r requirements.txt
-python -m streamlit run app/app.py
-```
+## Research limitations
 
-The demo reads saved CSV, JSON and Markdown artifacts.
-No API key, raw price download or live LLM call is needed to view it.
+Development and validation are exploratory datasets.
+The researcher has already observed the v1 holdout.
+Results do not establish statistical significance or deployment readiness.
+LLM reviews require human factual verification.
 
-## Run tests
+The recorded volatility-adjusted momentum candidate improved validation
+Sharpe versus raw momentum, but remained below the passive benchmarks.
 
-Install both the demo and research dependencies:
+## Local usage
 
-```bash
-python -m pip install -r requirements.txt -r requirements-research.txt
-python -m pytest tests -q
-```
+Use Python 3.13 and install requirements.txt.
 
-The tests included in this package cover the research modules and the UI.
-Additional agent and selection checks were executed in the development notebook.
+Recorded mode:
 
-## Agent
+    streamlit run app/research_workspace.py
 
-The recorded reviewer used `gemini-3.6-flash` with an explicit
-function-calling loop.
+Live mode on Linux/macOS:
 
-Its only exposed tool is `get_evidence(topic)`. It can read five registered
-evidence topics. It cannot modify strategies or run arbitrary code through
-the provided tool interface.
+    ALPHA_ENABLE_LIVE_RESEARCH=1 streamlit run app/research_workspace.py
 
-The agent was added after the research experiment. It did not generate the
-strategy or its performance.
-
-To develop or rerun the reviewer, install `requirements-agent.txt` and
-provide your own Gemini credentials securely. Provider access and quota
-are separate from the demo.
-
-## Structure
-
-- `src/alpha_lab/`: signals, evaluation, backtest, selection and reviewer.
-- `configs/`: data and research rules.
-- `tests/`: research and application tests.
-- `app/app.py`: Streamlit entrypoint.
-- `artifacts/`: saved metrics, histories, review and audit records.
-- `reports/research_report.md`: research findings and limitations.
-
-## Reproducibility
-
-This package supports artifact replay and software tests.
-It does not yet provide a one-command reproduction of the entire study.
-Raw market data are excluded. Registered historical hashes may refer to
-files retained in the original research workspace rather than this package.
-
-The demo verifies its own listed artifact checksums against
-`artifacts/demo_manifest.json`.
-
-## Limitations
-
-This is a nine-ETF research prototype, not a trading service.
-It does not model realistic order-book execution or establish novel alpha.
-Original LLM output remains available alongside editorial corrections;
-human approval is pending.
-
-## Data and publication
-
-Raw Yahoo Finance price data are not included.
-Review applicable data-use terms before publicly distributing derived
-artifacts. This repository package is prepared locally; packaging itself
-does not authorize public redistribution.
+Request IDs prevent replaying the same request.
+Equivalent formulas under different request IDs are not yet deduplicated.

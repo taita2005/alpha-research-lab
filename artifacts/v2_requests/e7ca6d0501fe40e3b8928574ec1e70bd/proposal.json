@@ -1,0 +1,22 @@
+{
+  "name": "volatility_adjusted_momentum_126",
+  "hypothesis": "Scaling the standard 126-session price return by the trailing 126-session daily volatility adjusts raw momentum for risk, favoring assets with steady trend continuation over highly volatile price spikes.",
+  "expression": {
+    "op": "safe_divide",
+    "left": {
+      "op": "return",
+      "field": "adj_close",
+      "window": 126
+    },
+    "right": {
+      "op": "rolling_std",
+      "input": {
+        "op": "return",
+        "field": "adj_close",
+        "window": 1
+      },
+      "window": 126
+    }
+  },
+  "overfit_risk": "The fixed 126-day window for both return and volatility measurement may be sensitive to market regimes where shorter or longer risk-adjustment horizons perform better."
+}

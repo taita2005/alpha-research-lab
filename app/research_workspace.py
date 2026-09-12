@@ -36,7 +36,41 @@ st.warning(
     "LLM reviews require human verification."
 )
 
-live_enabled = os.environ.get("ALPHA_ENABLE_LIVE_RESEARCH") == "1"
+# LIVE_WORKSPACE_V1
+# An explicit environment setting takes precedence over Secrets.
+live_setting = os.environ.get("ALPHA_ENABLE_LIVE_RESEARCH")
+
+if live_setting is None:
+    try:
+        live_setting = st.secrets.get(
+            "ALPHA_ENABLE_LIVE_RESEARCH", False
+        )
+    except FileNotFoundError:
+        live_setting = False
+
+live_enabled = str(live_setting).lower() in ("1", "true")
+
+if live_enabled:
+    from alpha_lab.session_workspace import create_workspace
+
+    if "live_workspace_path" not in st.session_state:
+        try:
+            with st.spinner("Preparing your research workspace..."):
+                session_root = create_workspace(ROOT)
+            st.session_state.live_workspace_path = str(session_root)
+        except Exception as error:
+            st.error(
+                "Research data preparation failed: "
+                + type(error).__name__
+            )
+            st.stop()
+
+    ROOT = Path(st.session_state.live_workspace_path)
+
+    st.caption(
+        "Live research enabled. New results belong to this browser "
+        "session. Download results before leaving."
+    )
 
 if "workspace_request_id" not in st.session_state:
     st.session_state.workspace_request_id = uuid.uuid4().hex
@@ -59,6 +93,10 @@ if st.button(
     st.session_state.workspace_submitted = False
 
 st.caption("Request ID: " + st.session_state.workspace_request_id)
+
+
+if st.button("Clear API key", key="clear_workspace_key"):
+    st.session_state["workspace_api_key"] = ""
 
 with st.form("research_form"):
     user_request = st.text_area(
